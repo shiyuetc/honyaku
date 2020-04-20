@@ -28,11 +28,15 @@ namespace honyaku
 
         private void DrawCaptureLine()
         {
-            Bitmap canvas = new Bitmap(this.ClientPanel.Width, this.ClientPanel.Height);
-            Graphics g = Graphics.FromImage(canvas);
-            g.DrawRectangle(new Pen(Color.Red, 1), 0, 0, this.ClientPanel.Width - 1, this.ClientPanel.Height - 1);
-            g.Dispose();
-            this.ClientPanel.BackgroundImage = canvas;
+            try
+            {
+                Bitmap canvas = new Bitmap(this.ClientPanel.Width, this.ClientPanel.Height);
+                Graphics g = Graphics.FromImage(canvas);
+                g.DrawRectangle(new Pen(Color.Red, 1), 0, 0, this.ClientPanel.Width - 1, this.ClientPanel.Height - 1);
+                g.Dispose();
+                this.ClientPanel.BackgroundImage = canvas;
+            }
+            catch { }
         }
 
         private void ChangeMode(AppMode appMode)
