@@ -34,16 +34,22 @@
             this.TranslateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReTranslateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.表示VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StealthModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.翻訳コンテナToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LateralSplitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.VerticalitySplitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ClientPanel = new System.Windows.Forms.Panel();
+            this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.QuickTranslateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PlaceManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CaptureRegionPanel = new System.Windows.Forms.Panel();
             this.TranslatorSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SourceLanguageLabel = new System.Windows.Forms.Label();
             this.SourceTextBox = new System.Windows.Forms.TextBox();
             this.TargetLanguageLabel = new System.Windows.Forms.Label();
             this.TargetTextBox = new System.Windows.Forms.TextBox();
-            this.StealthModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.HideSourceTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TranslatorSplitContainer)).BeginInit();
             this.TranslatorSplitContainer.Panel1.SuspendLayout();
@@ -57,14 +63,16 @@
             this.BackToolStripMenuItem,
             this.TranslateToolStripMenuItem,
             this.ReTranslateToolStripMenuItem,
-            this.表示VToolStripMenuItem});
+            this.表示VToolStripMenuItem,
+            this.ToolsToolStripMenuItem,
+            this.SettingToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(502, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.MouseEnter += new System.EventHandler(this.menuStrip1_MouseEnter);
-            this.menuStrip1.MouseLeave += new System.EventHandler(this.menuStrip1_MouseLeave);
+            this.menuStrip1.MouseEnter += new System.EventHandler(this.MenuStrip1_MouseEnter);
+            this.menuStrip1.MouseLeave += new System.EventHandler(this.MenuStrip1_MouseLeave);
             // 
             // BackToolStripMenuItem
             // 
@@ -101,11 +109,21 @@
             this.表示VToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.表示VToolStripMenuItem.Text = "表示(&V)";
             // 
+            // StealthModeToolStripMenuItem
+            // 
+            this.StealthModeToolStripMenuItem.CheckOnClick = true;
+            this.StealthModeToolStripMenuItem.Name = "StealthModeToolStripMenuItem";
+            this.StealthModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.StealthModeToolStripMenuItem.Text = "ステルスモード";
+            this.StealthModeToolStripMenuItem.Click += new System.EventHandler(this.StealthModeToolStripMenuItem_Click);
+            // 
             // 翻訳コンテナToolStripMenuItem
             // 
             this.翻訳コンテナToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LateralSplitToolStripMenuItem,
-            this.VerticalitySplitToolStripMenuItem});
+            this.VerticalitySplitToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.HideSourceTextToolStripMenuItem});
             this.翻訳コンテナToolStripMenuItem.Name = "翻訳コンテナToolStripMenuItem";
             this.翻訳コンテナToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.翻訳コンテナToolStripMenuItem.Text = "翻訳コンテナ";
@@ -115,27 +133,58 @@
             this.LateralSplitToolStripMenuItem.Checked = true;
             this.LateralSplitToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.LateralSplitToolStripMenuItem.Name = "LateralSplitToolStripMenuItem";
-            this.LateralSplitToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.LateralSplitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.LateralSplitToolStripMenuItem.Text = "左右に分割";
             this.LateralSplitToolStripMenuItem.Click += new System.EventHandler(this.LateralSplitToolStripMenuItem_Click);
             // 
             // VerticalitySplitToolStripMenuItem
             // 
             this.VerticalitySplitToolStripMenuItem.Name = "VerticalitySplitToolStripMenuItem";
-            this.VerticalitySplitToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.VerticalitySplitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.VerticalitySplitToolStripMenuItem.Text = "上下に分割";
             this.VerticalitySplitToolStripMenuItem.Click += new System.EventHandler(this.VerticalitySplitToolStripMenuItem_Click);
             // 
-            // ClientPanel
+            // ToolsToolStripMenuItem
             // 
-            this.ClientPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.QuickTranslateToolStripMenuItem,
+            this.PlaceManagementToolStripMenuItem});
+            this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
+            this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.ToolsToolStripMenuItem.Text = "ツール(&T)";
+            // 
+            // QuickTranslateToolStripMenuItem
+            // 
+            this.QuickTranslateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("QuickTranslateToolStripMenuItem.Image")));
+            this.QuickTranslateToolStripMenuItem.Name = "QuickTranslateToolStripMenuItem";
+            this.QuickTranslateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.QuickTranslateToolStripMenuItem.Text = "簡易キャプチャ+翻訳";
+            this.QuickTranslateToolStripMenuItem.Click += new System.EventHandler(this.QuickTranslateToolStripMenuItem_Click);
+            // 
+            // PlaceManagementToolStripMenuItem
+            // 
+            this.PlaceManagementToolStripMenuItem.Name = "PlaceManagementToolStripMenuItem";
+            this.PlaceManagementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PlaceManagementToolStripMenuItem.Text = "ウィンドウ配置管理";
+            this.PlaceManagementToolStripMenuItem.Click += new System.EventHandler(this.PlaceManagementToolStripMenuItem_Click);
+            // 
+            // SettingToolStripMenuItem
+            // 
+            this.SettingToolStripMenuItem.Name = "SettingToolStripMenuItem";
+            this.SettingToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.SettingToolStripMenuItem.Text = "設定(&O)";
+            this.SettingToolStripMenuItem.Click += new System.EventHandler(this.SettingToolStripMenuItem_Click);
+            // 
+            // CaptureRegionPanel
+            // 
+            this.CaptureRegionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClientPanel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientPanel.Location = new System.Drawing.Point(6, 24);
-            this.ClientPanel.Name = "ClientPanel";
-            this.ClientPanel.Size = new System.Drawing.Size(490, 312);
-            this.ClientPanel.TabIndex = 2;
+            this.CaptureRegionPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.CaptureRegionPanel.Location = new System.Drawing.Point(6, 24);
+            this.CaptureRegionPanel.Name = "CaptureRegionPanel";
+            this.CaptureRegionPanel.Size = new System.Drawing.Size(490, 312);
+            this.CaptureRegionPanel.TabIndex = 2;
             // 
             // TranslatorSplitContainer
             // 
@@ -165,11 +214,11 @@
             this.SourceLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SourceLanguageLabel.AutoSize = true;
             this.SourceLanguageLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SourceLanguageLabel.Location = new System.Drawing.Point(3, 301);
+            this.SourceLanguageLabel.Location = new System.Drawing.Point(3, 334);
             this.SourceLanguageLabel.Name = "SourceLanguageLabel";
-            this.SourceLanguageLabel.Size = new System.Drawing.Size(44, 14);
+            this.SourceLanguageLabel.Size = new System.Drawing.Size(31, 14);
             this.SourceLanguageLabel.TabIndex = 2;
-            this.SourceLanguageLabel.Text = "English";
+            this.SourceLanguageLabel.Text = "英語";
             // 
             // SourceTextBox
             // 
@@ -188,7 +237,7 @@
             this.TargetLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.TargetLanguageLabel.AutoSize = true;
             this.TargetLanguageLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.TargetLanguageLabel.Location = new System.Drawing.Point(3, 301);
+            this.TargetLanguageLabel.Location = new System.Drawing.Point(3, 334);
             this.TargetLanguageLabel.Name = "TargetLanguageLabel";
             this.TargetLanguageLabel.Size = new System.Drawing.Size(43, 14);
             this.TargetLanguageLabel.TabIndex = 3;
@@ -206,13 +255,18 @@
             this.TargetTextBox.Size = new System.Drawing.Size(250, 318);
             this.TargetTextBox.TabIndex = 1;
             // 
-            // StealthModeToolStripMenuItem
+            // toolStripMenuItem1
             // 
-            this.StealthModeToolStripMenuItem.CheckOnClick = true;
-            this.StealthModeToolStripMenuItem.Name = "StealthModeToolStripMenuItem";
-            this.StealthModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.StealthModeToolStripMenuItem.Text = "ステルスモード";
-            this.StealthModeToolStripMenuItem.Click += new System.EventHandler(this.StealthModeToolStripMenuItem_Click);
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 6);
+            // 
+            // HideSourceTextToolStripMenuItem
+            // 
+            this.HideSourceTextToolStripMenuItem.CheckOnClick = true;
+            this.HideSourceTextToolStripMenuItem.Name = "HideSourceTextToolStripMenuItem";
+            this.HideSourceTextToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.HideSourceTextToolStripMenuItem.Text = "翻訳前のテキストを隠す";
+            this.HideSourceTextToolStripMenuItem.Click += new System.EventHandler(this.HideSourceTextToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -220,7 +274,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(502, 342);
             this.Controls.Add(this.TranslatorSplitContainer);
-            this.Controls.Add(this.ClientPanel);
+            this.Controls.Add(this.CaptureRegionPanel);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -247,7 +301,7 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.Panel ClientPanel;
+        private System.Windows.Forms.Panel CaptureRegionPanel;
         private System.Windows.Forms.ToolStripMenuItem TranslateToolStripMenuItem;
         private System.Windows.Forms.SplitContainer TranslatorSplitContainer;
         private System.Windows.Forms.TextBox SourceTextBox;
@@ -261,6 +315,12 @@
         private System.Windows.Forms.ToolStripMenuItem LateralSplitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem VerticalitySplitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StealthModeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SettingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PlaceManagementToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem QuickTranslateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem HideSourceTextToolStripMenuItem;
     }
 }
 
