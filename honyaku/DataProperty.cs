@@ -8,6 +8,8 @@ namespace honyaku
     /// </summary>
     public class DataProperty
     {
+        public static readonly string TessDataFolder = "tessdata";
+
         public static List<Language> Languages = new List<Language>()
         {
             new Language("English", "英語", "en", "eng"),
