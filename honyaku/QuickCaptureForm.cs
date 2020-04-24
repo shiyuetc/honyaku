@@ -56,7 +56,6 @@ namespace honyaku
             this.Refresh();
 
             Point mousePoint = Cursor.Position;
-
             Size pictureSize = new Size(
                 Math.Abs(this.MouseDownPoint.X - mousePoint.X),
                 Math.Abs(this.MouseDownPoint.Y - mousePoint.Y)
@@ -64,6 +63,7 @@ namespace honyaku
 
             if (this.MouseDownFlag && pictureSize.Width > 0 && pictureSize.Height > 0)
             {
+                this.Hide();
                 this.ResultImage = new Bitmap(pictureSize.Width, pictureSize.Height);
                 Graphics g = Graphics.FromImage(this.ResultImage);
                 g.CopyFromScreen(new Point(
