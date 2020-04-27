@@ -2,29 +2,41 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="honyaku.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="capture_region_margin" Type="System.Int32" Scope="User">
+    <Setting Name="CaptureRegionMargin" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">6</Value>
     </Setting>
-    <Setting Name="capture_region_color" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="CaptureRegionColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Red</Value>
     </Setting>
-    <Setting Name="capture_region_visible" Type="System.Boolean" Scope="User">
+    <Setting Name="CaptureRegionVisible" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="source_language" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="SourceLanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">english</Value>
     </Setting>
-    <Setting Name="target_language" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="TargetLanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">japanese</Value>
     </Setting>
-    <Setting Name="hot_key" Type="System.Windows.Forms.Keys" Scope="User">
-      <Value Profile="(Default)">None</Value>
+    <Setting Name="HotKey" Type="System.Windows.Forms.Keys" Scope="User">
+      <Value Profile="(Default)">Ctrl+Alt+A</Value>
     </Setting>
-    <Setting Name="return_focus" Type="System.Boolean" Scope="User">
+    <Setting Name="ReturnFocus" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="capture_save" Type="System.Boolean" Scope="User">
+    <Setting Name="CaptureSave" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ResultFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">ＭＳ ゴシック, 12pt</Value>
+    </Setting>
+    <Setting Name="BackPlace" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="BackPlaceLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="BackPlaceSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

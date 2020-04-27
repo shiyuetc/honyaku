@@ -26,96 +26,144 @@ namespace honyaku.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("6")]
-        public int capture_region_margin {
+        public int CaptureRegionMargin {
             get {
-                return ((int)(this["capture_region_margin"]));
+                return ((int)(this["CaptureRegionMargin"]));
             }
             set {
-                this["capture_region_margin"] = value;
+                this["CaptureRegionMargin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Red")]
-        public global::System.Drawing.Color capture_region_color {
+        public global::System.Drawing.Color CaptureRegionColor {
             get {
-                return ((global::System.Drawing.Color)(this["capture_region_color"]));
+                return ((global::System.Drawing.Color)(this["CaptureRegionColor"]));
             }
             set {
-                this["capture_region_color"] = value;
+                this["CaptureRegionColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool capture_region_visible {
+        public bool CaptureRegionVisible {
             get {
-                return ((bool)(this["capture_region_visible"]));
+                return ((bool)(this["CaptureRegionVisible"]));
             }
             set {
-                this["capture_region_visible"] = value;
+                this["CaptureRegionVisible"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string source_language {
+        [global::System.Configuration.DefaultSettingValueAttribute("english")]
+        public string SourceLanguage {
             get {
-                return ((string)(this["source_language"]));
+                return ((string)(this["SourceLanguage"]));
             }
             set {
-                this["source_language"] = value;
+                this["SourceLanguage"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string target_language {
+        [global::System.Configuration.DefaultSettingValueAttribute("japanese")]
+        public string TargetLanguage {
             get {
-                return ((string)(this["target_language"]));
+                return ((string)(this["TargetLanguage"]));
             }
             set {
-                this["target_language"] = value;
+                this["TargetLanguage"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("None")]
-        public global::System.Windows.Forms.Keys hot_key {
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Alt+A")]
+        public global::System.Windows.Forms.Keys HotKey {
             get {
-                return ((global::System.Windows.Forms.Keys)(this["hot_key"]));
+                return ((global::System.Windows.Forms.Keys)(this["HotKey"]));
             }
             set {
-                this["hot_key"] = value;
+                this["HotKey"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool return_focus {
+        public bool ReturnFocus {
             get {
-                return ((bool)(this["return_focus"]));
+                return ((bool)(this["ReturnFocus"]));
             }
             set {
-                this["return_focus"] = value;
+                this["ReturnFocus"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool capture_save {
+        public bool CaptureSave {
             get {
-                return ((bool)(this["capture_save"]));
+                return ((bool)(this["CaptureSave"]));
             }
             set {
-                this["capture_save"] = value;
+                this["CaptureSave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ＭＳ ゴシック, 12pt")]
+        public global::System.Drawing.Font ResultFont {
+            get {
+                return ((global::System.Drawing.Font)(this["ResultFont"]));
+            }
+            set {
+                this["ResultFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool BackPlace {
+            get {
+                return ((bool)(this["BackPlace"]));
+            }
+            set {
+                this["BackPlace"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point BackPlaceLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["BackPlaceLocation"]));
+            }
+            set {
+                this["BackPlaceLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size BackPlaceSize {
+            get {
+                return ((global::System.Drawing.Size)(this["BackPlaceSize"]));
+            }
+            set {
+                this["BackPlaceSize"] = value;
             }
         }
     }
