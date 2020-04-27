@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,7 +14,7 @@ namespace honyaku
         private AppMode AppMode = AppMode.Capture;
 
         /// <summary>
-        /// 
+        /// 翻訳中かどうか
         /// </summary>
         private bool IsWork = false;
 
@@ -24,24 +24,9 @@ namespace honyaku
         private bool StealthMode = false;
 
         /// <summary>
-        /// 
+        /// 配置データの配列
         /// </summary>
-        public int CaptureRegionMargin { get; set; } = 6;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private bool CaptureRegionVisible { get; set; } = true;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private Color CaptureRegionColor { get; set; } = Color.Red;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private bool ReturnFocus { get; set; } = true;
+        private Place[] Places;
 
         /// <summary>
         /// コンストラクタ
@@ -52,64 +37,89 @@ namespace honyaku
         }
 
         /// <summary>
-        /// 設定情報のロード
+        /// フォームの初期化
         /// </summary>
-        private void LoadSetting()
+        private void Initialize()
         {
-            this.CaptureRegionMargin = (int)Properties.Settings.Default["capture_region_margin"];
-            this.CaptureRegionPanel.Size = new Size(this.TranslatorSplitContainer.Width - this.CaptureRegionMargin * 2, this.TranslatorSplitContainer.Height - this.CaptureRegionMargin);
-            this.CaptureRegionPanel.Location = new Point(this.CaptureRegionMargin, 24);
-            this.CaptureRegionVisible = (bool)Properties.Settings.Default["capture_region_visible"];
-            this.CaptureRegionColor = (Color)Properties.Settings.Default["capture_region_color"];
-            this.ReturnFocus = (bool)Properties.Settings.Default["return_focus"];
+            // キャプチャ領域を設定
+            this.CaptureRegionPanel.Size = new Size(this.TranslatorSplitContainer.Width - Setting.CaptureRegionMargin * 2, this.TranslatorSplitContainer.Height - Setting.CaptureRegionMargin);
+            this.CaptureRegionPanel.Location = new Point(Setting.CaptureRegionMargin, 24);
+
+            // 
+            if (Setting.BackPlace)
+            {
+                this.Location = Setting.BackPlaceLocation;
+                this.Size = Setting.BackPlaceSize;
+            }
+
+            // 領域線の描画
+            if (Setting.CaptureRegionVisible)
+            {
+                this.DrawCaptureLine();
+                this.Resize += (object sender, EventArgs e) => { this.DrawCaptureLine(); };
+            }
+
+            // 結果のテキストのフォントを変更
+            this.SourceTextBox.Font = Setting.ResultFont;
+            this.TargetTextBox.Font = Setting.ResultFont;
+
+            // 配置データを読み込む
+            this.UpdatePlaces();
         }
 
         /// <summary>
-        /// 
+        /// 配置データを読み込んでメニューに追加する
+        /// </summary>
+        private void UpdatePlaces()
+        {
+            try
+            {
+                System.Xml.Serialization.XmlSerializer serializer =
+                    new System.Xml.Serialization.XmlSerializer(typeof(Place[]));
+                System.IO.StreamReader sr = new System.IO.StreamReader(DataProperty.PlacesFile, new System.Text.UTF8Encoding(false));
+                this.Places = (Place[])serializer.Deserialize(sr);
+                sr.Close();
+
+                this.PlaceManagementToolStripMenuItem.DropDownItems.Clear();
+                ToolStripMenuItem[] items = new ToolStripMenuItem[this.Places.Length];
+                for (int i = 0; i < this.Places.Length; i++)
+                {
+                    ToolStripMenuItem item = new ToolStripMenuItem();
+                    item.Name = "PlaceToolStripMenuItem_" + i;
+                    item.Text = this.Places[i].Name;
+                    item.Click += this.PlaceToolStripMenuItem_Click;
+                    items[i] = item;
+                }
+                this.PlaceManagementToolStripMenuItem.DropDownItems.AddRange(items);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// リクエストのロックを操作する
         /// </summary>
         /// <param name="message"></param>
-        private void UpdateTitleMessage(string message = "")
+        private void RequestLock(bool isWork)
         {
-            if (message.Length == 0) this.Text = "Honyaku";
-            else this.Text = "Honyaku - " + message;
+            this.IsWork = isWork;
+            if(isWork)this.Text = "Honyaku - 翻訳中";
+            else this.Text = "Honyaku";
         }
-
-        /// <summary>
-        /// フォームのロードイベント
-        /// </summary>
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            this.LoadSetting();
-
-            this.TargetTextBox.BackColor = Color.White;
-            this.DrawCaptureLine();
-        }
-
-        /// <summary>
-        /// フォームのリサイズイベント
-        /// </summary>
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            this.DrawCaptureLine();
-        }
-
+        
         /// <summary>
         /// キャプチャ領域線を描画する
         /// </summary>
         private void DrawCaptureLine()
         {
-            if (this.CaptureRegionVisible)
+            try
             {
-                try
-                {
-                    Bitmap canvas = new Bitmap(this.CaptureRegionPanel.Width, this.CaptureRegionPanel.Height);
-                    Graphics g = Graphics.FromImage(canvas);
-                    g.DrawRectangle(new Pen(this.CaptureRegionColor, 1), 0, 0, this.CaptureRegionPanel.Width - 1, this.CaptureRegionPanel.Height - 1);
-                    g.Dispose();
-                    this.CaptureRegionPanel.BackgroundImage = canvas;
-                }
-                catch { }
+                Bitmap canvas = new Bitmap(this.CaptureRegionPanel.Width, this.CaptureRegionPanel.Height);
+                Graphics g = Graphics.FromImage(canvas);
+                g.DrawRectangle(new Pen(Setting.CaptureRegionColor, 1), 0, 0, this.CaptureRegionPanel.Width - 1, this.CaptureRegionPanel.Height - 1);
+                g.Dispose();
+                this.CaptureRegionPanel.BackgroundImage = canvas;
             }
+            catch { }
         }
 
         /// <summary>
@@ -126,18 +136,18 @@ namespace honyaku
                 this.ReTranslateToolStripMenuItem.Visible = false;
                 this.TranslatorSplitContainer.Visible = false;
             }
-            else if(appMode == AppMode.Translate)
+            else if (appMode == AppMode.Translate)
             {
                 this.TranslateToolStripMenuItem.Visible = false;
                 this.BackToolStripMenuItem.Visible = true;
                 this.ReTranslateToolStripMenuItem.Visible = true;
                 this.TranslatorSplitContainer.Visible = true;
 
-                if(this.StealthMode) this.Opacity = 1;
+                if (this.StealthMode) this.Opacity = 1;
             }
 
             // フォーカスを後ろのアプリケーションに渡す
-            if (this.ReturnFocus)
+            if (Setting.ReturnFocus)
             {
                 Point location = this.Location;
                 this.Location = new Point(-this.Width, -this.Height);
@@ -154,7 +164,7 @@ namespace honyaku
         /// <param name="flag">真が偽か</param>
         private void Stealth(bool flag)
         {
-            if(flag)
+            if (flag)
             {
                 for (int i = 10; i >= 3; i--)
                 {
@@ -169,6 +179,31 @@ namespace honyaku
                     this.Opacity = 0.1 * i;
                     System.Threading.Thread.Sleep(10);
                 }
+            }
+        }
+
+        /// <summary>
+        /// フォームのロードイベント
+        /// </summary>
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Setting.Load();
+            this.Initialize();
+        }
+
+        /// <summary>
+        /// フォームの終了イベント
+        /// </summary>
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(Setting.BackPlace)
+            {
+                Dictionary<string, object> settings = new Dictionary<string, object>()
+                {
+                    { "BackPlaceLocation", this.Location },
+                    { "BackPlaceSize", this.Size },
+                };
+                Setting.Save(settings);
             }
         }
 
@@ -202,8 +237,7 @@ namespace honyaku
         private async void TranslateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.IsWork) return;
-            this.IsWork = true;
-            this.UpdateTitleMessage("翻訳中");
+            this.RequestLock(true);
 
             Bitmap image = new Bitmap(this.CaptureRegionPanel.Width - 2, this.CaptureRegionPanel.Height - 2);
             Graphics g = Graphics.FromImage(image);
@@ -211,6 +245,12 @@ namespace honyaku
             g.CopyFromScreen(new Point(ClientPanelPoint.X + 1, ClientPanelPoint.Y + 1), new Point(0, 0), image.Size);
             g.Dispose();
 
+            // キャプチャ画像の保存
+            if(Setting.CaptureSave)
+            {
+                if (!System.IO.Directory.Exists("captures")) System.IO.Directory.CreateDirectory("captures");
+                image.Save("captures/" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".jpg");
+            }
 
             this.SourceTextBox.Text = await Task.Run(() => image.ToOcrString());
             this.TargetTextBox.Text = "";
@@ -225,8 +265,7 @@ namespace honyaku
                 this.ChangeMode(AppMode.Translate);
             }
 
-            this.UpdateTitleMessage();
-            this.IsWork = false;
+            this.RequestLock(false);
         }
 
         /// <summary>
@@ -235,8 +274,7 @@ namespace honyaku
         private async void ReTranslateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.IsWork) return;
-            this.IsWork = true;
-            this.UpdateTitleMessage("翻訳中");
+            this.RequestLock(true);
 
             this.SourceTextBox.Text = this.SourceTextBox.Text.Trim();
             this.TargetTextBox.Text = "";
@@ -246,8 +284,7 @@ namespace honyaku
                 this.TargetTextBox.Text = await Translator.Run(this.SourceTextBox.Text);
             }
 
-            this.UpdateTitleMessage();
-            this.IsWork = false;
+            this.RequestLock(false);
         }
 
         /// <summary>
@@ -312,7 +349,14 @@ namespace honyaku
             f.ShowDialog();
             if (f.ResultImage != null)
             {
-                this.UpdateTitleMessage("翻訳中");
+                // キャプチャ画像の保存
+                if (Setting.CaptureSave)
+                {
+                    if (!System.IO.Directory.Exists("captures")) System.IO.Directory.CreateDirectory("captures");
+                    f.ResultImage.Save("captures/" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".jpg");
+                }
+
+                this.RequestLock(true);
                 this.SourceTextBox.Text = await Task.Run(() => f.ResultImage.ToOcrString());
                 this.TargetTextBox.Text = "";
 
@@ -327,8 +371,7 @@ namespace honyaku
                 }
             }
 
-            this.UpdateTitleMessage();
-            this.IsWork = false;
+            this.RequestLock(false);
         }
 
         /// <summary>
@@ -341,6 +384,18 @@ namespace honyaku
                 this.Location.X + (this.Width - f.Width) / 2,
                 this.Location.Y + (this.Height - f.Height) / 2);
             f.ShowDialog();
+            if(f.IsEdit) this.UpdatePlaces();
+        }
+
+        /// <summary>
+        /// 配置ボタンのクリックイベント
+        /// </summary>
+        private void PlaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            int index = int.Parse(item.Name.Remove(0, item.Name.IndexOf("_") + 1));
+            this.Location = this.Places[index].Location;
+            this.Size = this.Places[index].Size;
         }
 
         /// <summary>
@@ -348,7 +403,13 @@ namespace honyaku
         /// </summary>
         private void SettingToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SettingForm f = new SettingForm();
+            f.Location = new Point(
+                this.Location.X + (this.Width - f.Width) / 2,
+                this.Location.Y + (this.Height - f.Height) / 2);
+            f.ShowDialog();
 
+            if (f.IsApply) Application.Restart();
         }
 
     }

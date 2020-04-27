@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.BackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,6 +39,8 @@
             this.翻訳コンテナToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LateralSplitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.VerticalitySplitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.HideSourceTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.QuickTranslateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PlaceManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,8 +51,7 @@
             this.SourceTextBox = new System.Windows.Forms.TextBox();
             this.TargetLanguageLabel = new System.Windows.Forms.Label();
             this.TargetTextBox = new System.Windows.Forms.TextBox();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.HideSourceTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HotKeyTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TranslatorSplitContainer)).BeginInit();
             this.TranslatorSplitContainer.Panel1.SuspendLayout();
@@ -113,7 +115,7 @@
             // 
             this.StealthModeToolStripMenuItem.CheckOnClick = true;
             this.StealthModeToolStripMenuItem.Name = "StealthModeToolStripMenuItem";
-            this.StealthModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.StealthModeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.StealthModeToolStripMenuItem.Text = "ステルスモード";
             this.StealthModeToolStripMenuItem.Click += new System.EventHandler(this.StealthModeToolStripMenuItem_Click);
             // 
@@ -125,7 +127,7 @@
             this.toolStripMenuItem1,
             this.HideSourceTextToolStripMenuItem});
             this.翻訳コンテナToolStripMenuItem.Name = "翻訳コンテナToolStripMenuItem";
-            this.翻訳コンテナToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.翻訳コンテナToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.翻訳コンテナToolStripMenuItem.Text = "翻訳コンテナ";
             // 
             // LateralSplitToolStripMenuItem
@@ -144,6 +146,19 @@
             this.VerticalitySplitToolStripMenuItem.Text = "上下に分割";
             this.VerticalitySplitToolStripMenuItem.Click += new System.EventHandler(this.VerticalitySplitToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 6);
+            // 
+            // HideSourceTextToolStripMenuItem
+            // 
+            this.HideSourceTextToolStripMenuItem.CheckOnClick = true;
+            this.HideSourceTextToolStripMenuItem.Name = "HideSourceTextToolStripMenuItem";
+            this.HideSourceTextToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.HideSourceTextToolStripMenuItem.Text = "翻訳前のテキストを隠す";
+            this.HideSourceTextToolStripMenuItem.Click += new System.EventHandler(this.HideSourceTextToolStripMenuItem_Click);
+            // 
             // ToolsToolStripMenuItem
             // 
             this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -157,14 +172,15 @@
             // 
             this.QuickTranslateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("QuickTranslateToolStripMenuItem.Image")));
             this.QuickTranslateToolStripMenuItem.Name = "QuickTranslateToolStripMenuItem";
-            this.QuickTranslateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.QuickTranslateToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.QuickTranslateToolStripMenuItem.Text = "簡易キャプチャ+翻訳";
             this.QuickTranslateToolStripMenuItem.Click += new System.EventHandler(this.QuickTranslateToolStripMenuItem_Click);
             // 
             // PlaceManagementToolStripMenuItem
             // 
+            this.PlaceManagementToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("PlaceManagementToolStripMenuItem.Image")));
             this.PlaceManagementToolStripMenuItem.Name = "PlaceManagementToolStripMenuItem";
-            this.PlaceManagementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PlaceManagementToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.PlaceManagementToolStripMenuItem.Text = "ウィンドウ配置管理";
             this.PlaceManagementToolStripMenuItem.Click += new System.EventHandler(this.PlaceManagementToolStripMenuItem_Click);
             // 
@@ -245,6 +261,7 @@
             // 
             // TargetTextBox
             // 
+            this.TargetTextBox.BackColor = System.Drawing.Color.White;
             this.TargetTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TargetTextBox.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.TargetTextBox.Location = new System.Drawing.Point(0, 0);
@@ -255,18 +272,9 @@
             this.TargetTextBox.Size = new System.Drawing.Size(250, 318);
             this.TargetTextBox.TabIndex = 1;
             // 
-            // toolStripMenuItem1
+            // HotKeyTimer
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 6);
-            // 
-            // HideSourceTextToolStripMenuItem
-            // 
-            this.HideSourceTextToolStripMenuItem.CheckOnClick = true;
-            this.HideSourceTextToolStripMenuItem.Name = "HideSourceTextToolStripMenuItem";
-            this.HideSourceTextToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.HideSourceTextToolStripMenuItem.Text = "翻訳前のテキストを隠す";
-            this.HideSourceTextToolStripMenuItem.Click += new System.EventHandler(this.HideSourceTextToolStripMenuItem_Click);
+            this.HotKeyTimer.Interval = 500;
             // 
             // MainForm
             // 
@@ -278,13 +286,14 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(200, 88);
             this.Name = "MainForm";
             this.Text = "Honyaku";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.ControlDark;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.TranslatorSplitContainer.Panel1.ResumeLayout(false);
@@ -321,6 +330,7 @@
         private System.Windows.Forms.ToolStripMenuItem QuickTranslateToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem HideSourceTextToolStripMenuItem;
+        private System.Windows.Forms.Timer HotKeyTimer;
     }
 }
 
