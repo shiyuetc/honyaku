@@ -27,7 +27,7 @@ namespace honyaku
         /// <summary>
         /// 枠線のペンを定義
         /// </summary>
-        private Pen RedPen = new Pen(Color.Red, 3f);
+        private Pen RedPen = new Pen(Setting.CaptureRegionColor, 3f);
 
         /// <summary>
         /// コンストラクタ
