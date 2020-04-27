@@ -15,14 +15,9 @@ namespace honyaku
         private MainForm MainForm;
 
         /// <summary>
-        /// 配置データのファイルパス
-        /// </summary>
-        private readonly string FileName = "Places.xml";
-
-        /// <summary>
         /// 編集フラグ
         /// </summary>
-        private bool Edit = false;
+        public bool IsEdit { get; private set; } = false;
 
         /// <summary>
         /// コンストラクタ
@@ -39,13 +34,13 @@ namespace honyaku
         /// </summary>
         private void PlaceManagementForm_Load(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists(this.FileName))
+            if (System.IO.File.Exists(DataProperty.PlacesFile))
             {
                 try
                 {
                     System.Xml.Serialization.XmlSerializer serializer =
                         new System.Xml.Serialization.XmlSerializer(typeof(Place[]));
-                    System.IO.StreamReader sr = new System.IO.StreamReader(FileName, new System.Text.UTF8Encoding(false));
+                    System.IO.StreamReader sr = new System.IO.StreamReader(DataProperty.PlacesFile, new System.Text.UTF8Encoding(false));
                     Place[] places = (Place[])serializer.Deserialize(sr);
                     sr.Close();
 
@@ -72,7 +67,7 @@ namespace honyaku
         /// </summary>
         private void PlaceManagementForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this.Edit)
+            if (this.IsEdit)
             {
                 try
                 {
@@ -87,7 +82,7 @@ namespace honyaku
 
                     System.Xml.Serialization.XmlSerializer serializer =
                         new System.Xml.Serialization.XmlSerializer(typeof(Place[]));
-                    System.IO.StreamWriter sw = new System.IO.StreamWriter(FileName, false, new System.Text.UTF8Encoding(false));
+                    System.IO.StreamWriter sw = new System.IO.StreamWriter(DataProperty.PlacesFile, false, new System.Text.UTF8Encoding(false));
                     serializer.Serialize(sw, places);
                     sw.Close();
                 }
@@ -105,7 +100,7 @@ namespace honyaku
         {
             this.PlaceListDataGridView.Rows.Add("配置" + (this.PlaceListDataGridView.Rows.Count + 1), this.MainForm.Location.ToString(), this.MainForm.Size.ToString(),
             this.MainForm.Location.X, this.MainForm.Location.Y, this.MainForm.Size.Width, this.MainForm.Size.Height);
-            this.Edit = true;
+            this.IsEdit = true;
         }
 
         /// <summary>
@@ -116,7 +111,7 @@ namespace honyaku
             if (this.PlaceListDataGridView.SelectedRows.Count == 1)
             {
                 this.PlaceListDataGridView.Rows.Remove(this.PlaceListDataGridView.SelectedRows[0]);
-                this.Edit = true;
+                this.IsEdit = true;
             }
         }
 
@@ -138,7 +133,7 @@ namespace honyaku
         /// </summary>
         private void PlaceListDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            this.Edit = true;
+            this.IsEdit = true;
         }
 
         /// <summary>
