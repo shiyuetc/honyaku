@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace honyaku
 {
@@ -14,12 +13,17 @@ namespace honyaku
         public static readonly string TessDataFolder = "tessdata";
 
         /// <summary>
+        /// 配置データのファイルパス
+        /// </summary>
+        public static readonly string PlacesFile = "Places.xml";
+
+        /// <summary>
         /// 対応している言語
         /// </summary>
-        public static List<Language> Languages = new List<Language>()
+        public static readonly Dictionary<string, Language> Languages = new Dictionary<string, Language>()
         {
-            new Language("English", "英語", "en", "eng"),
-            new Language("Japanese", "日本語", "ja", "jpn"),
+            { "english", new Language("English", "英語", "en", "eng") },
+            { "japanese", new Language("Japanese", "日本語", "ja", "jpn") },
         };
     }
 }
