@@ -19,10 +19,12 @@ namespace honyaku
             Setting.BackPlaceLocation = (Point)Properties.Settings.Default["BackPlaceLocation"];
             Setting.BackPlaceSize = (Size)Properties.Settings.Default["BackPlaceSize"];
             Setting.ReturnFocus = (bool)Properties.Settings.Default["ReturnFocus"];
-            Setting.CaptureSave = (bool)Properties.Settings.Default["CaptureSave"];
+
             Setting.CaptureRegionMargin = (int)Properties.Settings.Default["CaptureRegionMargin"];
             Setting.CaptureRegionVisible = (bool)Properties.Settings.Default["CaptureRegionVisible"];
             Setting.CaptureRegionColor = (Color)Properties.Settings.Default["CaptureRegionColor"];
+            Setting.CaptureSave = (bool)Properties.Settings.Default["CaptureSave"];
+
             Setting.ResultFont = (Font)Properties.Settings.Default["ResultFont"];
         }
 
@@ -37,10 +39,12 @@ namespace honyaku
             Properties.Settings.Default["BackPlaceLocation"] = Setting.BackPlaceLocation;
             Properties.Settings.Default["BackPlaceSize"] = Setting.BackPlaceSize;
             Properties.Settings.Default["ReturnFocus"] = Setting.ReturnFocus;
-            Properties.Settings.Default["CaptureSave"] = Setting.CaptureSave;
+            
             Properties.Settings.Default["CaptureRegionMargin"] = Setting.CaptureRegionMargin;
             Properties.Settings.Default["CaptureRegionVisible"] = Setting.CaptureRegionVisible;
             Properties.Settings.Default["CaptureRegionColor"] = Setting.CaptureRegionColor;
+            Properties.Settings.Default["CaptureSave"] = Setting.CaptureSave;
+
             Properties.Settings.Default["ResultFont"] = Setting.ResultFont;
             Properties.Settings.Default.Save();
         }
@@ -97,6 +101,7 @@ namespace honyaku
         /// 
         /// </summary>
         public static int CaptureRegionMargin { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

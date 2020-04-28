@@ -95,7 +95,7 @@
             // 
             // CaptureRegionMarginNumericUpDown
             // 
-            this.CaptureRegionMarginNumericUpDown.Location = new System.Drawing.Point(94, 89);
+            this.CaptureRegionMarginNumericUpDown.Location = new System.Drawing.Point(94, 25);
             this.CaptureRegionMarginNumericUpDown.Maximum = new decimal(new int[] {
             24,
             0,
@@ -109,13 +109,14 @@
             0,
             0,
             0});
+            this.CaptureRegionMarginNumericUpDown.ValueChanged += new System.EventHandler(this.CaptureRegionMarginNumericUpDown_ValueChanged);
             // 
             // CaptureRegionVisibleCheckBox
             // 
             this.CaptureRegionVisibleCheckBox.AutoSize = true;
             this.CaptureRegionVisibleCheckBox.Checked = true;
             this.CaptureRegionVisibleCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CaptureRegionVisibleCheckBox.Location = new System.Drawing.Point(17, 27);
+            this.CaptureRegionVisibleCheckBox.Location = new System.Drawing.Point(17, 57);
             this.CaptureRegionVisibleCheckBox.Name = "CaptureRegionVisibleCheckBox";
             this.CaptureRegionVisibleCheckBox.Size = new System.Drawing.Size(112, 16);
             this.CaptureRegionVisibleCheckBox.TabIndex = 2;
@@ -126,7 +127,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 46);
+            this.label2.Location = new System.Drawing.Point(30, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 12);
             this.label2.TabIndex = 1;
@@ -135,7 +136,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 91);
+            this.label1.Location = new System.Drawing.Point(15, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 12);
             this.label1.TabIndex = 0;
@@ -171,6 +172,7 @@
             this.SourceLanguageComboBox.Name = "SourceLanguageComboBox";
             this.SourceLanguageComboBox.Size = new System.Drawing.Size(121, 20);
             this.SourceLanguageComboBox.TabIndex = 3;
+            this.SourceLanguageComboBox.SelectedIndexChanged += new System.EventHandler(this.SourceLanguageComboBox_SelectedIndexChanged);
             // 
             // TargetLanguageComboBox
             // 
@@ -180,6 +182,7 @@
             this.TargetLanguageComboBox.Name = "TargetLanguageComboBox";
             this.TargetLanguageComboBox.Size = new System.Drawing.Size(121, 20);
             this.TargetLanguageComboBox.TabIndex = 4;
+            this.TargetLanguageComboBox.SelectedIndexChanged += new System.EventHandler(this.TargetLanguageComboBox_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -220,7 +223,7 @@
             // 
             // CaptureRegionColorButton
             // 
-            this.CaptureRegionColorButton.Location = new System.Drawing.Point(110, 46);
+            this.CaptureRegionColorButton.Location = new System.Drawing.Point(110, 76);
             this.CaptureRegionColorButton.Name = "CaptureRegionColorButton";
             this.CaptureRegionColorButton.Size = new System.Drawing.Size(75, 23);
             this.CaptureRegionColorButton.TabIndex = 5;
@@ -260,7 +263,7 @@
             this.groupBox4.Controls.Add(this.ReturnFocusCheckBox);
             this.groupBox4.Location = new System.Drawing.Point(6, 97);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(305, 102);
+            this.groupBox4.Size = new System.Drawing.Size(305, 82);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "その他";
@@ -268,7 +271,7 @@
             // BackPlaceCheckBox
             // 
             this.BackPlaceCheckBox.AutoSize = true;
-            this.BackPlaceCheckBox.Location = new System.Drawing.Point(17, 72);
+            this.BackPlaceCheckBox.Location = new System.Drawing.Point(17, 27);
             this.BackPlaceCheckBox.Name = "BackPlaceCheckBox";
             this.BackPlaceCheckBox.Size = new System.Drawing.Size(179, 16);
             this.BackPlaceCheckBox.TabIndex = 12;
@@ -281,7 +284,7 @@
             this.ReturnFocusCheckBox.AutoSize = true;
             this.ReturnFocusCheckBox.Checked = true;
             this.ReturnFocusCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ReturnFocusCheckBox.Location = new System.Drawing.Point(17, 50);
+            this.ReturnFocusCheckBox.Location = new System.Drawing.Point(17, 49);
             this.ReturnFocusCheckBox.Name = "ReturnFocusCheckBox";
             this.ReturnFocusCheckBox.Size = new System.Drawing.Size(272, 16);
             this.ReturnFocusCheckBox.TabIndex = 6;
@@ -305,9 +308,9 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.CaptureSaveCheckBox);
-            this.groupBox6.Location = new System.Drawing.Point(7, 236);
+            this.groupBox6.Location = new System.Drawing.Point(6, 131);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(304, 40);
+            this.groupBox6.Size = new System.Drawing.Size(305, 59);
             this.groupBox6.TabIndex = 15;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "その他";
@@ -315,7 +318,7 @@
             // CaptureSaveCheckBox
             // 
             this.CaptureSaveCheckBox.AutoSize = true;
-            this.CaptureSaveCheckBox.Location = new System.Drawing.Point(16, 18);
+            this.CaptureSaveCheckBox.Location = new System.Drawing.Point(17, 27);
             this.CaptureSaveCheckBox.Name = "CaptureSaveCheckBox";
             this.CaptureSaveCheckBox.Size = new System.Drawing.Size(162, 16);
             this.CaptureSaveCheckBox.TabIndex = 14;
@@ -329,12 +332,13 @@
             this.groupBox5.Controls.Add(this.HotKeysComboBox);
             this.groupBox5.Controls.Add(this.HotCtrlKeyCheckBox);
             this.groupBox5.Controls.Add(this.HotShiftKeyCheckBox);
-            this.groupBox5.Location = new System.Drawing.Point(6, 131);
+            this.groupBox5.Location = new System.Drawing.Point(6, 196);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(305, 99);
+            this.groupBox5.Size = new System.Drawing.Size(305, 72);
             this.groupBox5.TabIndex = 13;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "キャプチャショートカット";
+            this.groupBox5.Visible = false;
             // 
             // HotAltKeyCheckBox
             // 
@@ -359,7 +363,7 @@
             // 
             this.HotKeysComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.HotKeysComboBox.FormattingEnabled = true;
-            this.HotKeysComboBox.Location = new System.Drawing.Point(18, 60);
+            this.HotKeysComboBox.Location = new System.Drawing.Point(166, 36);
             this.HotKeysComboBox.Name = "HotKeysComboBox";
             this.HotKeysComboBox.Size = new System.Drawing.Size(75, 20);
             this.HotKeysComboBox.TabIndex = 10;
@@ -462,6 +466,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "設定";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingForm_FormClosing);
             this.Load += new System.EventHandler(this.SettingForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CaptureRegionMarginNumericUpDown)).EndInit();
             this.groupBox1.ResumeLayout(false);

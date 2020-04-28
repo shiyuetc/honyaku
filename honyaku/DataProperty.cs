@@ -11,6 +11,11 @@ namespace honyaku
         /// 言語識別データのディレクトリ
         /// </summary>
         public static readonly string TessDataFolder = "tessdata";
+        
+        public static bool ExistTessData(string Tess)
+        {
+            return System.IO.File.Exists(DataProperty.TessDataFolder + "/" + Tess + ".traineddata");
+        }
 
         /// <summary>
         /// 配置データのファイルパス

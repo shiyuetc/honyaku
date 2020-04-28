@@ -52,6 +52,8 @@
             this.TargetLanguageLabel = new System.Windows.Forms.Label();
             this.TargetTextBox = new System.Windows.Forms.TextBox();
             this.HotKeyTimer = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TranslatorSplitContainer)).BeginInit();
             this.TranslatorSplitContainer.Panel1.SuspendLayout();
@@ -106,7 +108,9 @@
             // 
             this.表示VToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StealthModeToolStripMenuItem,
-            this.翻訳コンテナToolStripMenuItem});
+            this.翻訳コンテナToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.ExplorerToolStripMenuItem});
             this.表示VToolStripMenuItem.Name = "表示VToolStripMenuItem";
             this.表示VToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.表示VToolStripMenuItem.Text = "表示(&V)";
@@ -115,7 +119,7 @@
             // 
             this.StealthModeToolStripMenuItem.CheckOnClick = true;
             this.StealthModeToolStripMenuItem.Name = "StealthModeToolStripMenuItem";
-            this.StealthModeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.StealthModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.StealthModeToolStripMenuItem.Text = "ステルスモード";
             this.StealthModeToolStripMenuItem.Click += new System.EventHandler(this.StealthModeToolStripMenuItem_Click);
             // 
@@ -127,7 +131,7 @@
             this.toolStripMenuItem1,
             this.HideSourceTextToolStripMenuItem});
             this.翻訳コンテナToolStripMenuItem.Name = "翻訳コンテナToolStripMenuItem";
-            this.翻訳コンテナToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.翻訳コンテナToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.翻訳コンテナToolStripMenuItem.Text = "翻訳コンテナ";
             // 
             // LateralSplitToolStripMenuItem
@@ -172,7 +176,7 @@
             // 
             this.QuickTranslateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("QuickTranslateToolStripMenuItem.Image")));
             this.QuickTranslateToolStripMenuItem.Name = "QuickTranslateToolStripMenuItem";
-            this.QuickTranslateToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.QuickTranslateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.QuickTranslateToolStripMenuItem.Text = "簡易キャプチャ+翻訳";
             this.QuickTranslateToolStripMenuItem.Click += new System.EventHandler(this.QuickTranslateToolStripMenuItem_Click);
             // 
@@ -180,7 +184,7 @@
             // 
             this.PlaceManagementToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("PlaceManagementToolStripMenuItem.Image")));
             this.PlaceManagementToolStripMenuItem.Name = "PlaceManagementToolStripMenuItem";
-            this.PlaceManagementToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.PlaceManagementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.PlaceManagementToolStripMenuItem.Text = "ウィンドウ配置管理";
             this.PlaceManagementToolStripMenuItem.Click += new System.EventHandler(this.PlaceManagementToolStripMenuItem_Click);
             // 
@@ -276,6 +280,19 @@
             // 
             this.HotKeyTimer.Interval = 500;
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // ExplorerToolStripMenuItem
+            // 
+            this.ExplorerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ExplorerToolStripMenuItem.Image")));
+            this.ExplorerToolStripMenuItem.Name = "ExplorerToolStripMenuItem";
+            this.ExplorerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExplorerToolStripMenuItem.Text = "エクスプローラー(&E)";
+            this.ExplorerToolStripMenuItem.Click += new System.EventHandler(this.ExplorerToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -331,6 +348,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem HideSourceTextToolStripMenuItem;
         private System.Windows.Forms.Timer HotKeyTimer;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
     }
 }
 

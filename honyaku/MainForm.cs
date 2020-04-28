@@ -252,7 +252,22 @@ namespace honyaku
                 image.Save("captures/" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".jpg");
             }
 
-            this.SourceTextBox.Text = await Task.Run(() => image.ToOcrString());
+            if (!DataProperty.ExistTessData(DataProperty.Languages[Setting.SourceLanguage].ISO639_2))
+            {
+                MessageBox.Show("言語学習データが見つかりませんでした", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                goto end;
+            }
+
+            try
+            {
+                this.SourceTextBox.Text = await Task.Run(() => image.ToOcrString(DataProperty.Languages[Setting.SourceLanguage].ISO639_2));
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                goto end;
+            }
+
             this.TargetTextBox.Text = "";
 
             if (this.SourceTextBox.Text.Length == 0)
@@ -261,11 +276,11 @@ namespace honyaku
             }
             else
             {
-                this.TargetTextBox.Text = await Translator.Run(this.SourceTextBox.Text);
+                this.TargetTextBox.Text = await Translator.Run(this.SourceTextBox.Text, DataProperty.Languages[Setting.SourceLanguage].ISO639_1, DataProperty.Languages[Setting.TargetLanguage].ISO639_1);
                 this.ChangeMode(AppMode.Translate);
             }
 
-            this.RequestLock(false);
+            end: this.RequestLock(false);
         }
 
         /// <summary>
@@ -281,7 +296,7 @@ namespace honyaku
 
             if (this.SourceTextBox.Text.Length > 0)
             {
-                this.TargetTextBox.Text = await Translator.Run(this.SourceTextBox.Text);
+                this.TargetTextBox.Text = await Translator.Run(this.SourceTextBox.Text, DataProperty.Languages[Setting.SourceLanguage].ISO639_1, DataProperty.Languages[Setting.TargetLanguage].ISO639_1);
             }
 
             this.RequestLock(false);
@@ -338,12 +353,20 @@ namespace honyaku
         }
 
         /// <summary>
+        /// エクスプローラーボタンのクリックイベント
+        /// </summary>
+        private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("EXPLORER.EXE", Environment.CurrentDirectory);
+        }
+
+        /// <summary>
         /// 簡易キャプチャー+翻訳ボタンのクリックイベント
         /// </summary>
         private async void QuickTranslateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.IsWork) return;
-            this.IsWork = true;
+            this.RequestLock(true);
 
             QuickCaptureForm f = new QuickCaptureForm();
             f.ShowDialog();
@@ -356,8 +379,22 @@ namespace honyaku
                     f.ResultImage.Save("captures/" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".jpg");
                 }
 
-                this.RequestLock(true);
-                this.SourceTextBox.Text = await Task.Run(() => f.ResultImage.ToOcrString());
+                if (!DataProperty.ExistTessData(DataProperty.Languages[Setting.SourceLanguage].ISO639_2))
+                {
+                    MessageBox.Show("言語学習データが見つかりませんでした", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    goto end;
+                }
+
+                try
+                {
+                    this.SourceTextBox.Text = await Task.Run(() => f.ResultImage.ToOcrString(DataProperty.Languages[Setting.SourceLanguage].ISO639_2));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    goto end;
+                }
+
                 this.TargetTextBox.Text = "";
 
                 if (this.SourceTextBox.Text.Length == 0)
@@ -366,12 +403,12 @@ namespace honyaku
                 }
                 else
                 {
-                    this.TargetTextBox.Text = await Translator.Run(this.SourceTextBox.Text);
+                    this.TargetTextBox.Text = await Translator.Run(this.SourceTextBox.Text, DataProperty.Languages[Setting.SourceLanguage].ISO639_1, DataProperty.Languages[Setting.TargetLanguage].ISO639_1);
                     this.ChangeMode(AppMode.Translate);
                 }
             }
 
-            this.RequestLock(false);
+            end: this.RequestLock(false);
         }
 
         /// <summary>
@@ -408,9 +445,7 @@ namespace honyaku
                 this.Location.X + (this.Width - f.Width) / 2,
                 this.Location.Y + (this.Height - f.Height) / 2);
             f.ShowDialog();
-
             if (f.IsApply) Application.Restart();
         }
-
     }
 }
