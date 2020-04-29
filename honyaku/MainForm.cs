@@ -41,6 +41,8 @@ namespace honyaku
         /// </summary>
         private void Initialize()
         {
+            this.LanguageToolStripMenuItem.Text = DataProperty.Languages[Setting.SourceLanguage].JapaneseName + " -> " + DataProperty.Languages[Setting.TargetLanguage].JapaneseName;
+
             // キャプチャ領域を設定
             this.CaptureRegionPanel.Size = new Size(this.TranslatorSplitContainer.Width - Setting.CaptureRegionMargin * 2, this.TranslatorSplitContainer.Height - Setting.CaptureRegionMargin);
             this.CaptureRegionPanel.Location = new Point(Setting.CaptureRegionMargin, 24);
