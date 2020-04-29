@@ -62,7 +62,7 @@ namespace honyaku
             this.TempResultFont = Setting.ResultFont;
             this.ResultFontTextBox.Text = Setting.ResultFont.ToString();
 
-            this.IsEdit = false;
+            this.Edit(false);
         }
 
 
@@ -76,6 +76,12 @@ namespace honyaku
                 DialogResult result = MessageBox.Show("変更した設定を保存しますか?", "質問", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if ((result == DialogResult.Yes && !this.Apply()) || result == DialogResult.Cancel) e.Cancel = true;
             }
+        }
+
+        private void Edit(bool b)
+        {
+            this.IsEdit = b;
+            this.ApplyButton.Enabled = b;
         }
 
         /// <summary>
@@ -104,7 +110,7 @@ namespace honyaku
             Setting.ResultFont = this.TempResultFont;
 
             Setting.Save();
-            this.IsEdit = false;
+            this.Edit(false);
             this.IsApply = true;
             return true;
         }
@@ -125,7 +131,7 @@ namespace honyaku
 
             this.TempResultFont = new Font("ＭＳ ゴシック", 12);
             this.ResultFontTextBox.Text = this.TempResultFont.ToString();
-            this.IsEdit = true;
+            this.Edit(true);
         }
 
         /// <summary>
@@ -149,7 +155,7 @@ namespace honyaku
         /// </summary>
         private void SourceLanguageComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.IsEdit = true;
+            this.Edit(true);
         }
 
         /// <summary>
@@ -157,7 +163,7 @@ namespace honyaku
         /// </summary>
         private void TargetLanguageComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.IsEdit = true;
+            this.Edit(true);
         }
 
         /// <summary>
@@ -165,7 +171,7 @@ namespace honyaku
         /// </summary>
         private void BackPlaceCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            this.IsEdit = true;
+            this.Edit(true);
         }
         
         /// <summary>
@@ -173,7 +179,7 @@ namespace honyaku
         /// </summary>
         private void ReturnFocusCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            this.IsEdit = true;
+            this.Edit(true);
         }
 
         /// <summary>
@@ -181,7 +187,7 @@ namespace honyaku
         /// </summary>
         private void CaptureRegionMarginNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            this.IsEdit = true;
+            this.Edit(true);
         }
 
         /// <summary>
@@ -191,7 +197,7 @@ namespace honyaku
         {
             this.label2.Enabled = this.CaptureRegionVisibleCheckBox.Checked;
             this.CaptureRegionColorButton.Enabled = this.CaptureRegionVisibleCheckBox.Checked;
-            this.IsEdit = true;
+            this.Edit(true);
         }
 
         /// <summary>
@@ -205,7 +211,7 @@ namespace honyaku
             {
                 this.CaptureRegionColorButton.Text = String.Format("#{0:X2}{1:X2}{2:X2}", cd.Color.R, cd.Color.G, cd.Color.B);
                 this.CaptureRegionColorButton.BackColor = cd.Color;
-                this.IsEdit = true;
+                this.Edit(true);
             }
         }
 
@@ -220,7 +226,7 @@ namespace honyaku
             {
                 this.TempResultFont = fd.Font;
                 this.ResultFontTextBox.Text = fd.Font.ToString();
-                this.IsEdit = true;
+                this.Edit(true);
             }
         }
     }
